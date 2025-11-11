@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Popover } from "bits-ui";
-	import { setContext } from "svelte";
+	import { setComboboxContext } from "./combobox-context.svelte";
 
 	type SingleProps = {
 		variant: "single";
@@ -55,7 +55,7 @@
 	}
 
 	// Provide context for child components
-	setContext("combobox", {
+	setComboboxContext({
 		variant,
 		handleSelect,
 		isSelected,
