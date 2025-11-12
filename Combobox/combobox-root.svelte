@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Popover } from "bits-ui";
+	import * as Popover from "$lib/components/ui/popover";
+	import { Popover as PopoverPrimitive } from "bits-ui";
 	import { setComboboxContext } from "./combobox-context.svelte";
 
 	type SingleProps = {
@@ -14,9 +15,13 @@
 		onValuesChange?: (values: string[]) => void;
 	};
 
-	type Props = Popover.RootProps & {
+	type Props = PopoverPrimitive.RootProps & {
 		open?: boolean;
 		children?: any;
+		value?: string;
+		values?: string[];
+		onValueChange?: (value: string) => void;
+		onValuesChange?: (values: string[]) => void;
 	} & (SingleProps | MultipleProps);
 
 	let {
@@ -28,7 +33,7 @@
 		onValuesChange,
 		children,
 		...restProps
-	}: Props & { value?: string; values?: string[] } = $props();
+	}: Props = $props();
 
 	function handleSelect(itemValue: string) {
 		if (variant === "single") {
@@ -38,7 +43,7 @@
 		} else {
 			const currentValues = values || [];
 			if (currentValues.includes(itemValue)) {
-				values = currentValues.filter(v => v !== itemValue);
+				values = currentValues.filter((v: string) => v !== itemValue);
 			} else {
 				values = [...currentValues, itemValue];
 			}
