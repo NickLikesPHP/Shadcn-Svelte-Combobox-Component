@@ -4,13 +4,13 @@
 	import { setComboboxContext } from "./combobox-context.svelte";
 
 	type SingleProps = {
-		variant: "single";
+		type: "single";
 		value?: string;
 		onValueChange?: (value: string) => void;
 	};
 
 	type MultipleProps = {
-		variant: "multiple";
+		type: "multiple";
 		values?: string[];
 		onValuesChange?: (values: string[]) => void;
 	};
@@ -25,7 +25,7 @@
 	} & (SingleProps | MultipleProps);
 
 	let {
-		variant,
+		type,
 		open = $bindable(false),
 		value = $bindable(undefined),
 		values = $bindable(undefined),
@@ -36,7 +36,7 @@
 	}: Props = $props();
 
 	function handleSelect(itemValue: string) {
-		if (variant === "single") {
+		if (type === "single") {
 			value = itemValue;
 			onValueChange?.(itemValue);
 			open = false;
@@ -52,7 +52,7 @@
 	}
 
 	function isSelected(itemValue: string): boolean {
-		if (variant === "single") {
+		if (type === "single") {
 			return value === itemValue;
 		} else {
 			return (values || []).includes(itemValue);
@@ -61,7 +61,7 @@
 
 	// Provide context for child components
 	setComboboxContext({
-		variant,
+		type,
 		handleSelect,
 		isSelected,
 	});

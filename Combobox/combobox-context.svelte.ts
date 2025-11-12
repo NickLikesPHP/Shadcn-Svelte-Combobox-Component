@@ -3,7 +3,7 @@ import { getContext, setContext } from "svelte";
 const COMBOBOX_CONTEXT_KEY = "combobox";
 
 export type ComboboxContext = {
-	variant: "single" | "multiple";
+	type: "single" | "multiple";
 	handleSelect: (value: string) => void;
 	isSelected: (value: string) => boolean;
 };

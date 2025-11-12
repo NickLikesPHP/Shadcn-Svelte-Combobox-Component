@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as Command from "$lib/components/ui/command";
 	import CheckIcon from "@lucide/svelte/icons/check";
-	import { Checkbox } from "$lib/components/ui/checkbox";
 	import { cn } from "$lib/utils";
 	import { getComboboxContext } from "./combobox-context.svelte";
 
@@ -27,11 +26,7 @@
 </script>
 
 <Command.Item {value} onSelect={handleSelect} class={cn("", className)} {...restProps}>
-	{#if context?.variant === "multiple"}
-		<Checkbox checked={selected} class="mr-2" />
-	{:else}
-		<CheckIcon class={cn("mr-2 size-4", !selected && "text-transparent")} />
-	{/if}
+	<CheckIcon class={cn("mr-2 size-4", !selected && "text-transparent")} />
 	{@render children?.()}
 </Command.Item>
 
